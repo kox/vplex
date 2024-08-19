@@ -6,8 +6,8 @@ const config = {
   prefix: 'tw-', // Your custom prefix
   content: [
     // Add paths to all your component files
-    '../../packages/ui/**/*.{js,jsx,ts,tsx}',
-    '../../apps/*/**/*.{js,jsx,ts,tsx}'
+    '@repo/ui/**/*.{js,jsx,ts,tsx}',
+    '@repo/apps/*/**/*.{js,jsx,ts,tsx}'
   ],
   theme: {
     container: {
