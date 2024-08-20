@@ -1,0 +1,12 @@
+{
+    "name": "@repo/config",
+    "version": "1.0.0",
+    "main": "index.js",
+    "license": "MIT",
+    "files": [
+      ".eslintrc.js",
+      "eslint-preset.js",
+      "postcss.config.js",
+      "tailwind.config.js"
+    ]
+  }

@@ -5,9 +5,11 @@ const config = {
   darkMode: ["class"],
   prefix: '', // Your custom prefix
   content: [
+    '../ui/**/*.tsx',
+    '../../apps/platform/src/*/**/*.tsx',
     // Add paths to all your component files
-    '@repo/ui/**/*.{js,jsx,ts,tsx}',
-    '@repo/apps/*/**/*.{js,jsx,ts,tsx}'
+    // '@repo/ui/**/*.{js,jsx,ts,tsx}',
+    // '@repo/apps/*/**/*.{js,jsx,ts,tsx}'
   ],
   theme: {
     container: {

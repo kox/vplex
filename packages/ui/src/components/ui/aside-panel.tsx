@@ -9,12 +9,12 @@ export const AsidePanel = () => {
         <nav className="flex flex-col items-center gap-4 px-2 sm:py-4">
           <Tooltip>
           <TooltipTrigger>
-            <Link to=".">
+            <Link to="." className="flex">
               <Package2 className="h-4 w-4 transition-all group-hover:scale-110" />         
-              <span className="sm:hidden block">Dashboard</span>
+              <div className="invisible">Dashboard</div>
             </Link>
             </TooltipTrigger>
-            <TooltipContent side="right">Dashboard</TooltipContent>
+            <TooltipContent side="right">Dashboard 2</TooltipContent>
           </Tooltip>
           {/* <Tooltip>
             <Link to=".">link</Link>

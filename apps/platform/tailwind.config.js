@@ -1,1 +1,1 @@
-export * from "@repo/tailwind-config/tailwind.config";
+module.exports = require('@repo/config/tailwind.config');

@@ -10,10 +10,7 @@
     "lint": {
       "dependsOn": ["^lint"]
     },
-    "test": {
-      "dependsOn": ["^build"]
-    },
-    "prettier": {},
+    "test": {},
     "dev": {
       "cache": false,
       "persistent": true
