@@ -3,12 +3,13 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 import { Navbar } from '@repo/ui/components/ui/navbar'
+import { AsidePanel } from '@repo/ui/components/ui/aside-panel'
 
 function App() {
   const [count, setCount] = useState(0)
 
   return (
-    <div className="tw-flex tw-min-h-screen tw-w-full tw-flex-col tw-bg-muted/40">
+    <div className="flex min-h-screen w-full flex-col bg-muted/40">
       <AsidePanel />
       <Navbar/>
       <div>

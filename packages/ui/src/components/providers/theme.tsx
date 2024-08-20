@@ -29,7 +29,7 @@ export function ThemeProvider({
     const root = window.document.documentElement
 
     root.classList.remove("light")
-    root.classList.add("dark", "tw-bg-stone-900", "tw-text-stone-100")
+    root.classList.add("dark", "bg-stone-900", "text-stone-100")
   }, [theme])
 
   const value = {

@@ -3,7 +3,7 @@ import tailwindcssAnimate from "tailwindcss-animate";
 
 const config = {
   darkMode: ["class"],
-  prefix: 'tw-', // Your custom prefix
+  prefix: '', // Your custom prefix
   content: [
     // Add paths to all your component files
     '@repo/ui/**/*.{js,jsx,ts,tsx}',

@@ -8,10 +8,15 @@ export const AsidePanel = () => {
         <aside className="fixed inset-y-0 left-0 z-10 hidden w-14 flex-col border-r bg-background sm:flex">    
         <nav className="flex flex-col items-center gap-4 px-2 sm:py-4">
           <Tooltip>
-            <Link to=".">link</Link>
-            <Package2 className="h-4 w-4 transition-all group-hover:scale-110" />         
+          <TooltipTrigger>
+            <Link to=".">
+              <Package2 className="h-4 w-4 transition-all group-hover:scale-110" />         
+              <span className="sm:hidden block">Dashboard</span>
+            </Link>
+            </TooltipTrigger>
+            <TooltipContent side="right">Dashboard</TooltipContent>
           </Tooltip>
-          <Tooltip>
+          {/* <Tooltip>
             <Link to=".">link</Link>
             <Package2 className="h-4 w-4 transition-all group-hover:scale-110" />         
           </Tooltip>
@@ -88,7 +93,7 @@ export const AsidePanel = () => {
             <TooltipContent className="TooltipContent" sideOffset={5}>
               Notifications
             </TooltipContent>
-          </Tooltip>
+          </Tooltip> */}
         </nav>
       </aside>
     );
