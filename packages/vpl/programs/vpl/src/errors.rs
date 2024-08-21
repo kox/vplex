@@ -5,5 +5,6 @@ pub enum VplError {
     #[msg("Undefined error just happened")]
     Undefined,
 
-    
+    #[msg("You are not authorized")]
+    UnAuthorized
 }
