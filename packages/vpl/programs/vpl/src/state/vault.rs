@@ -1,7 +1,7 @@
 use anchor_lang::prelude::*;
 
 #[account]
-#[derive(InitSpace)]
+/* #[derive(InitSpace)] */
 pub struct VaultConfig {
     pub authority: Pubkey,
 
@@ -10,6 +10,6 @@ pub struct VaultConfig {
     pub bump: u8
 }
 
-/* impl Space for VaultConfig {
-    const INIT_SPACE: usize = 8 + 32 + 8 * 1;
-} */
+impl Space for VaultConfig {
+    const INIT_SPACE: usize = 8 + 32 + 8 + 1;
+}
