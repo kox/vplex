@@ -85,14 +85,9 @@ describe("vpl", () => {
       .then(log);
 
     const vaultConfigData = await program.account.vaultConfig.fetch(vaultConfig);
-    console.log(vaultConfigData);
 
     assert.equal(seed.toString(), vaultConfigData.seed.toString());
     assert.ok(vaultConfigData.bump > 0);
     assert.ok(vaultConfigData.sVaultBump > 0);
   });
 });
-function getMinimumBalanceForRentExemptMint(connection: anchor.web3.Connection) {
-  throw new Error("Function not implemented.");
-}
-

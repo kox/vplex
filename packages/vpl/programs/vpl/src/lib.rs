@@ -24,4 +24,8 @@ pub mod vpl {
     pub fn create(ctx: Context<CreateVault>, seed: u64) -> Result<()> {
         ctx.accounts.create_vault(seed, &ctx.bumps)
     }
+
+    pub fn update(ctx: Context<UpdateVault>, seed: u64) -> Result<()> {
+        ctx.accounts.update_vault(seed)
+    }
 }
