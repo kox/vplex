@@ -2,6 +2,9 @@ use anchor_lang::prelude::*;
 
 use crate::state::VaultConfig;
 
+/// Create Vault (ONLY FOR SOL)
+/// 
+/// seed: uint64 passed to the instruction to create a unique vault and config
 #[derive(Accounts)]
 #[instruction(seed: u64)]
 pub struct CreateVault<'info> {
@@ -9,11 +12,20 @@ pub struct CreateVault<'info> {
     pub creator: Signer<'info>,
 
     #[account(
+        seeds = [
+            b"svault",
+            seed.to_le_bytes().as_ref() 
+        ],
+        bump
+    )]
+    s_vault: SystemAccount<'info>,
+
+    #[account(
         init,
         payer = creator,
         space = VaultConfig::INIT_SPACE,
         seeds = [
-            b"vpl", 
+            b"config", 
             seed.to_le_bytes().as_ref()
         ],
         bump,
@@ -29,6 +41,7 @@ impl<'info> CreateVault<'info> {
             seed,
             authority: self.creator.key(),
             bump: bumps.config,
+            s_vault_bump: bumps.s_vault,
         });
 
         Ok(())

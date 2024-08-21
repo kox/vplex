@@ -1,9 +1,10 @@
 import * as anchor from "@coral-xyz/anchor";
 import { BN, Program } from "@coral-xyz/anchor";
 import { Vpl } from "../target/types/vpl";
-import { describe, it } from "node:test";
 import { randomBytes } from "crypto";
 import { Keypair, LAMPORTS_PER_SOL, PublicKey, SystemProgram, Transaction } from "@solana/web3.js";
+import { assert } from "chai";
+import { burn } from "@solana/spl-token";
 
 describe("vpl", () => {
   // Configure the client to use the local cluster.
@@ -40,7 +41,12 @@ describe("vpl", () => {
 
   // Based on the seeds we defined to create the Escrow account, we can find the public key of the PDA address 
   const vaultConfig = PublicKey.findProgramAddressSync(
-    [Buffer.from("vpl"), seed.toArrayLike(Buffer, "le", 8)],
+    [Buffer.from("config"), seed.toArrayLike(Buffer, "le", 8)],
+    program.programId
+  )[0];
+
+  const sVault = PublicKey.findProgramAddressSync(
+    [Buffer.from("svault"), seed.toArrayLike(Buffer, "le", 8)],
     program.programId
   )[0];
 
@@ -48,6 +54,7 @@ describe("vpl", () => {
   const accounts = {
     creator: creator.publicKey,
     config: vaultConfig,
+    sVault: sVault,
   }
 
   it("Airdrop and create mints", async () => {
@@ -68,7 +75,7 @@ describe("vpl", () => {
   });
 
 
-  it("should create a vault with a basic configuration!", async () => {
+  it("should create a vault (SOL) plus a config PDA!", async () => {
     await program.methods
       .create(seed)
       .accounts({ ...accounts })
@@ -77,7 +84,12 @@ describe("vpl", () => {
       .then(confirm)
       .then(log);
 
-    
+    const vaultConfigData = await program.account.vaultConfig.fetch(vaultConfig);
+    console.log(vaultConfigData);
+
+    assert.equal(seed.toString(), vaultConfigData.seed.toString());
+    assert.ok(vaultConfigData.bump > 0);
+    assert.ok(vaultConfigData.sVaultBump > 0);
   });
 });
 function getMinimumBalanceForRentExemptMint(connection: anchor.web3.Connection) {
