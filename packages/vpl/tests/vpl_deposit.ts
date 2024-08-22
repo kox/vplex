@@ -57,7 +57,9 @@ describe("vpl", () => {
     sVault: sVault,
   }
 
-  it("should not be autorized to change the vault config if you are no the creator!", async () => {
+  const amount = new BN(1 * LAMPORTS_PER_SOL); // 1 SOL
+
+  it("should allow, the creator, to deposit SOL into the vault!", async () => {
     let tx = new Transaction();
     tx.instructions = [
       ...[creator, user].map((account) =>
@@ -74,27 +76,47 @@ describe("vpl", () => {
     await program.methods
       .create(seed)
       .accounts({ ...accounts })
-      .signers([creator]  )
+      .signers([creator])
       .rpc()
       .then(confirm);
 
 
     try {
       await program.methods
-        .update(seed)
+        .deposit(seed, amount)
         .accounts({ 
-          updater: user.publicKey,
+          ...accounts, 
+          user: creator.publicKey,
         })
-        .signers([user]  )
+        .signers([creator])
         .rpc()
         .then(confirm)
         .then(log);
 
-      throw new Error("It should not arrive here!");
+      const vaultBalance = await connection.getBalance(sVault);
+      assert.equal(vaultBalance.toString(), amount.toString());
     } catch(err) {
-      assert.equal(err.error.errorCode.code, 'UnAuthorized');
-      assert.equal(err.error.errorMessage, "You are not authorized");
+      throw new Error("It should not fail!");
+    }
+  });
+
+  it("should allow, another user, to deposit SOL into the vault!", async () => {
+    try {
+      await program.methods
+        .deposit(seed, amount)
+        .accounts({ 
+          ...accounts, 
+          user: user.publicKey,
+        })
+        .signers([user])
+        .rpc()
+        .then(confirm)
+        .then(log);
+
+      const vaultBalance = await connection.getBalance(sVault);
+      assert.equal(vaultBalance.toString(), new BN(2 * LAMPORTS_PER_SOL).toString());
+    } catch(err) {
+      throw new Error("It should not fail!");
     }
   });
 });
-
