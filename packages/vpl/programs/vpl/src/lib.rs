@@ -28,4 +28,8 @@ pub mod vpl {
     pub fn update(ctx: Context<UpdateVault>, seed: u64) -> Result<()> {
         ctx.accounts.update_vault(seed)
     }
+
+    pub fn deposit(ctx: Context<Deposit>, seed: u64, amount: u64) -> Result<()> {
+        ctx.accounts.deposit(seed, amount)
+    }
 }
